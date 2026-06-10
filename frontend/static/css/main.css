@@ -105,7 +105,7 @@ p { color: var(--text-sub); }
 .logo {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.5rem;
   text-decoration: none;
   font-family: var(--font-display);
   font-size: 1.35rem;
