@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:900px;margin:0 auto;padding:4rem 2rem">
+  <h1 class="gradient-text" style="font-size:2.5rem;margin-bottom:0.5rem">About SkillyLens</h1>
+  <p style="color:var(--text-sub);font-size:1.1rem;margin-bottom:3rem">
+    A smart virtual career mentor for students and graduates navigating the tech industry.
+  </p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h2 style="margin-bottom:1rem">🧠 How It Works</h2>
+    <div class="steps">
+      {% for step in [
+        ("1", "Upload Resume", "Upload your PDF resume — our parser extracts all skills automatically."),
+        ("2", "Select Role & Level", "Choose your target job role and current education level."),
+        ("3", "Get Career DNA", "Receive a 5-axis Career DNA radar chart, readiness score, and skill gap breakdown."),
+        ("4", "Follow Your Roadmap", "Get an AI-generated 90-day personalized learning roadmap."),
+        ("5", "Discover AI Tools", "Find both famous and underrated AI tools curated for your role."),
+        ("6", "Chat with AI Mentor", "Ask career questions and get instant, India-specific guidance.")
+      ] %}
+      <div class="step-item">
+        <div class="step-num">{{ step[0] }}</div>
+        <div>
+          <h4>{{ step[1] }}</h4>
+          <p style="color:var(--text-muted);font-size:0.9rem">{{ step[2] }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-bottom:1rem">⚡ Tech Stack</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+      {% for tech in ["Python Flask", "Groq LLaMA3", "pdfplumber", "MySQL", "Chart.js", "ReportLab", "HTML/CSS/JS"] %}
+        <span class="tag tag-existing">{{ tech }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem">
+    <a href="/upload" class="btn-primary btn-lg">Start Your Analysis →</a>
+  </div>
+</div>
+
+<style>
+.steps { display:flex; flex-direction:column; gap:1.25rem; }
+.step-item { display:flex; gap:1rem; align-items:flex-start; }
+.step-num {
+  background:rgba(99,102,241,0.15); color:var(--accent);
+  border-radius:50%; width:32px; height:32px; min-width:32px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:0.85rem;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,53 @@
+.chatbot-wrapper {
+  display: flex;
+  height: calc(100vh - 65px);
+  overflow: hidden;
+}
+.chat-sidebar {
+  width: 280px; min-width: 280px;
+  padding: 1.5rem;
+  border-radius: 0;
+  border-top: none; border-bottom: none; border-left: none;
+  overflow-y: auto;
+}
+.chat-main {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.chat-messages {
+  flex: 1; overflow-y: auto;
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.chat-input-bar {
+  display: flex; gap: 0.75rem; padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+.chat-input {
+  flex: 1; padding: 0.75rem 1rem;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); font-size: 0.95rem;
+}
+.chat-input:focus { outline: none; border-color: var(--accent); }
+.chat-send-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent); color: white;
+  border: none; border-radius: 10px; cursor: pointer;
+  font-size: 0.9rem; font-weight: 500; transition: opacity 0.2s;
+}
+.chat-send-btn:hover { opacity: 0.85; }
+.suggestion-btn {
+  display: block; width: 100%;
+  text-align: left; padding: 0.5rem 0.75rem;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-sub);
+  font-size: 0.8rem; cursor: pointer; margin-bottom: 0.4rem;
+  transition: all 0.2s;
+}
+.suggestion-btn:hover { border-color: var(--accent); color: var(--text); }
+.typing-dots { letter-spacing: 3px; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+@media (max-width: 768px) {
+  .chat-sidebar { display: none; }
+}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block extra_css %}<link rel="stylesheet" href="/static/css/dashboard.css">{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+  <div class="dash-header">
+    <div>
+      <h1 class="gradient-text">Career DNA Report</h1>
+      <p class="text-muted">{{ data.job_role }} · {{ data.level }}</p>
+    </div>
+    <div class="dash-actions">
+      <a href="/chatbot" class="btn-outline">💬 Ask AI Mentor</a>
+      <button onclick="downloadReport()" class="btn-primary">⬇ Download PDF</button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Score Card -->
+    <div class="card card-glow">
+      <h3>Career Readiness</h3>
+      <div class="score-ring-container" style="margin-top:1rem">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="60" fill="none" stroke="#1a1a2e" stroke-width="12"/>
+          <circle cx="70" cy="70" r="60" fill="none" stroke="#6366f1" stroke-width="12"
+            stroke-dasharray="{{ (data.readiness_score / 100) * 377 }} 377"
+            stroke-linecap="round"/>
+        </svg>
+        <div class="score-text">
+          <div class="score-number">{{ data.readiness_score }}%</div>
+          <div style="font-size:0.7rem;color:#64748b">Ready</div>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:0.75rem;font-size:0.85rem;color:#94a3b8">
+        {% if data.readiness_score >= 70 %}🟢 Strong Profile!
+        {% elif data.readiness_score >= 40 %}🟡 Keep Building
+        {% else %}🔴 Just Getting Started{% endif %}
+      </p>
+    </div>
+
+    <!-- Career DNA Radar -->
+    <div class="card">
+      <h3>Career DNA</h3>
+      <canvas id="radarChart" width="280" height="280"></canvas>
+    </div>
+
+    <!-- Existing Skills -->
+    <div class="card">
+      <h3>✅ Your Skills <span style="color:#22c55e">({{ data.existing_skills|length }})</span></h3>
+      <div style="margin-top:0.75rem">
+        {% for skill in data.existing_skills %}
+          <span class="tag tag-existing">{{ skill.title() }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Missing Skills -->
+    <div class="card">
+      <h3>🎯 Skills to Learn <span style="color:#ef4444">({{ data.missing_skills|length }})</span></h3>
+      <div style="margin-top:0.75rem">
+        {% for skill in data.missing_skills %}
+          <span class="tag tag-missing">{{ skill.title() }}</span>
+        {% endfor %}
+        {% for skill in data.good_to_have[:4] %}
+          <span class="tag tag-nice">{{ skill }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Roadmap Section -->
+  <div class="card" style="margin-top:1.5rem">
+    <h2>🗺 90-Day Learning Roadmap</h2>
+    <div id="roadmap-container" style="margin-top:1.5rem">
+      <div id="roadmap-loading">Generating your personalized roadmap...</div>
+    </div>
+  </div>
+
+  <!-- AI Tools Section -->
+  <div class="card" style="margin-top:1.5rem">
+    <h2>🤖 AI Tools for {{ data.job_role }}</h2>
+    <div style="margin-top:1rem">
+      <h4 style="color:#a855f7;margin-bottom:0.75rem">🔥 Famous Tools</h4>
+      <div class="tools-grid" id="famous-tools"></div>
+      <h4 style="color:#f59e0b;margin:1rem 0 0.75rem">💎 Underrated but Powerful</h4>
+      <div class="tools-grid" id="underrated-tools"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/dashboard.js"></script>
+<script>
+    const analysisData = JSON.parse('{{ data|tojson|safe }}');
+    initDashboard(analysisData);
+</script>
+{% endblock %}

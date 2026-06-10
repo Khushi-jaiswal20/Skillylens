@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:900px;margin:2rem auto;padding:0 1rem">
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a855f7);
+                    display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700">
+            {{ name[0].upper() }}
+        </div>
+        <div>
+            <h1 style="font-family:var(--font-display)">{{ name }}</h1>
+            <p style="color:var(--text-muted);font-size:0.85rem">Your Career Journey</p>
+        </div>
+    </div>
+
+    <!-- Past Analyses -->
+    <h2 style="margin-bottom:1rem">📊 Past Analyses</h2>
+    {% if analyses %}
+        {% for a in analyses %}
+        <div class="card" style="margin-bottom:1rem">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                    <strong>{{ a[0] }}</strong>
+                    <span style="color:var(--text-muted);font-size:0.8rem;margin-left:0.5rem">· {{ a[1] }}</span>
+                </div>
+                <div style="color:var(--accent);font-weight:700;font-size:1.2rem">{{ a[2] }}%</div>
+            </div>
+            <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">
+                {{ a[5].strftime('%d %b %Y') if a[5] else '' }}
+            </p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card" style="text-align:center;color:var(--text-muted)">
+            No analyses yet. <a href="/upload" style="color:var(--accent)">Analyze your resume →</a>
+        </div>
+    {% endif %}
+        
+    <div style="margin-top:2rem; text-align:center;">
+    <button
+        onclick="if(confirm('Are you sure? This action cannot be undone.')) window.location='/delete-account';"
+        style="
+            background:#ef4444;
+            color:white;
+            border:none;
+            padding:12px 24px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        ">
+        🗑 Delete Profile
+    </button>
+</div>
+    <!-- Chat History -->
+    <h2 style="margin:2rem 0 1rem">💬 Chat History</h2>
+    {% if chats %}
+        <div class="card" style="max-height:400px;overflow-y:auto">
+            {% for c in chats %}
+            <div style="border-bottom:1px solid var(--border);padding:0.75rem 0">
+                <div style="color:var(--accent);font-size:0.8rem;margin-bottom:0.25rem">
+                    You · {{ c[0] }}
+                </div>
+                <div style="margin-bottom:0.5rem">{{ c[1] }}</div>
+                <div style="color:var(--text-sub);font-size:0.85rem;
+                            background:var(--bg-elevated);padding:0.5rem;border-radius:8px">
+                    {{ c[2] }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card" style="text-align:center;color:var(--text-muted)">
+            No chats yet. <a href="/chatbot" style="color:var(--accent)">Talk to AI Mentor →</a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

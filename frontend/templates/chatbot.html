@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block extra_css %}<link rel="stylesheet" href="/static/css/chatbot.css">{% endblock %}
+{% block content %}
+<div class="chatbot-wrapper">
+  <div class="chat-sidebar card">
+    <h3 style="margin-bottom:0.5rem">AI Career Mentor</h3>
+    <p style="color:var(--text-muted);font-size:0.8rem">Powered by Groq LLaMA</p>
+    {% if data %}
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <p style="font-size:0.8rem;color:var(--text-muted)">Your Context</p>
+      <p style="font-size:0.9rem;margin-top:0.25rem"><strong>{{ data.job_role }}</strong></p>
+      <p style="font-size:0.85rem;color:var(--text-sub)">{{ data.level }}</p>
+      <div style="margin-top:0.75rem">
+        <span style="font-size:0.8rem;color:var(--text-muted)">Readiness</span>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--accent)">{{ data.readiness_score }}%</div>
+      </div>
+    </div>
+    {% endif %}
+    <div style="margin-top:1.5rem">
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Try asking:</p>
+      {% for q in ["How do I get an internship?", "What certifications should I do?", "How to improve my resume?", "Suggest interview prep plan"] %}
+      <button class="suggestion-btn" onclick="sendSuggestion('{{ q }}')">{{ q }}</button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="chat-main">
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble bubble-ai">
+        👋 Hi! I'm your SkillyLens AI Mentor. I can help with career advice, placement tips, skill roadmaps, and more. What's on your mind?
+      </div>
+    </div>
+    <div class="chat-input-bar">
+      <input type="text" id="chatInput" placeholder="Ask anything about your career..." class="chat-input"
+             onkeydown="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()" class="chat-send-btn">Send →</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}<script src="/static/js/chatbot.js"></script>{% endblock %}

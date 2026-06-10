@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card card">
+    <h2 class="gradient-text" style="margin-bottom:0.25rem">Create Account</h2>
+    <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:0.9rem">Start your career analysis journey</p>
+
+    <div id="error-msg" class="error-box" style="display:none"></div>
+    <div id="success-msg" class="success-box" style="display:none">Account created! Redirecting...</div>
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Khushi Sharma" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="you@example.com" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Min 6 characters" class="form-input">
+    </div>
+    <button onclick="handleSignup()" class="btn-primary" style="width:100%;padding:0.8rem;font-size:1rem;margin-top:0.5rem">
+      Create Account
+    </button>
+    <p style="text-align:center;margin-top:1rem;color:var(--text-muted);font-size:0.9rem">
+      Already have an account? <a href="/login" style="color:var(--accent)">Login</a>
+    </p>
+  </div>
+</div>
+
+<style>
+.auth-wrapper { display:flex; justify-content:center; align-items:center; min-height:80vh; padding:2rem; }
+.auth-card { width:100%; max-width:420px; }
+.form-group { margin-bottom:1rem; }
+.form-group label { display:block; margin-bottom:0.4rem; font-size:0.85rem; color:var(--text-sub); }
+.form-input {
+  width:100%; padding:0.75rem 1rem;
+  background:var(--bg-elevated); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-size:0.95rem; transition:border-color 0.2s;
+}
+.form-input:focus { outline:none; border-color:var(--accent); }
+.error-box { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:#ef4444; padding:0.75rem; border-radius:8px; margin-bottom:1rem; font-size:0.875rem; }
+.success-box { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); color:#22c55e; padding:0.75rem; border-radius:8px; margin-bottom:1rem; font-size:0.875rem; }
+</style>
+
+<script>
+async function handleSignup() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  if (!name || !email || !password) { showError('Fill all fields'); return; }
+  if (password.length < 6) { showError('Password must be 6+ characters'); return; }
+  const res = await fetch('/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password })
+  });
+  const data = await res.json();
+  if (data.success) {
+    document.getElementById('success-msg').style.display = 'block';
+    setTimeout(() => window.location.href = '/login', 1500);
+  } else showError(data.error || 'Signup failed');
+}
+function showError(msg) {
+  const el = document.getElementById('error-msg');
+  el.textContent = msg; el.style.display = 'block';
+}
+</script>
+{% endblock %}

@@ -1,0 +1,91 @@
+from flask import Blueprint, request, jsonify, session, render_template
+import os, json
+from werkzeug.utils import secure_filename
+from services.resume_parser import extract_text_from_pdf, extract_skills, extract_name_email
+from services.skill_analyzer import analyze_skills
+from services.groq_service import generate_roadmap
+from extensions import mysql
+
+resume_bp = Blueprint('resume', __name__)
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'pdf'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@resume_bp.route('/upload', methods=['GET'])
+def upload_page():
+    if 'user_id' not in session:
+        return render_template('upload.html', logged_in=False)
+    return render_template('upload.html', logged_in=True)
+
+@resume_bp.route('/analyze', methods=['POST'])
+def analyze():
+    if 'resume' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+    
+    file = request.files['resume']
+    job_role = request.form.get('job_role', 'Full Stack Developer')
+    level = request.form.get('level', 'Student')
+    
+    if not allowed_file(file.filename):
+        return jsonify({'error': 'Only PDF files allowed'}), 400
+    
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    file.save(filepath)
+    
+    # Parse & analyze
+    text = extract_text_from_pdf(filepath)
+    extracted_skills = extract_skills(text)
+    name, email = extract_name_email(text)
+    analysis = analyze_skills(extracted_skills, job_role, level)
+    
+    # Generate roadmap
+    roadmap_raw = generate_roadmap(job_role, analysis['missing_skills'], level)
+    try:
+        import re
+        json_match = re.search(r'\{.*\}', roadmap_raw, re.DOTALL)
+        roadmap = json.loads(json_match.group()) if json_match else {}
+    except:
+        roadmap = {}
+    
+    result = {
+        'name': name,
+        'job_role': job_role,
+        'level': level,
+        'existing_skills': analysis['existing_skills'],
+        'missing_skills': analysis['missing_skills'],
+        'readiness_score': analysis['readiness_score'],
+        'career_dna': analysis['career_dna'],
+        'ai_tools': analysis['ai_tools'],
+        'good_to_have': analysis['good_to_have'],
+        'roadmap': roadmap
+    }
+    
+    # Save to DB if logged in
+    if 'user_id' in session:
+        cur = mysql.connection.cursor()
+        cur.execute("""INSERT INTO analyses 
+            (user_id, job_role, level, resume_text, existing_skills, missing_skills, readiness_score, roadmap, ai_tools)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+            (session['user_id'], job_role, level, text[:5000],
+             json.dumps(analysis['existing_skills']),
+             json.dumps(analysis['missing_skills']),
+             analysis['readiness_score'],
+             json.dumps(roadmap),
+             json.dumps(analysis['ai_tools'])))
+        mysql.connection.commit()
+        session['analysis_id'] = cur.lastrowid
+    
+    session['analysis'] = result
+    os.remove(filepath)  # cleanup
+    return jsonify({'success': True, 'redirect': '/dashboard'})
+
+@resume_bp.route('/dashboard')
+def dashboard():
+    analysis = session.get('analysis', {})
+    if not analysis:
+        return render_template('upload.html', error="Please upload your resume first")
+    return render_template('dashboard.html', data=analysis)

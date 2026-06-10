@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="upload-wrapper">
+  <div class="upload-card card card-glow">
+    <h2 class="gradient-text" style="margin-bottom:0.25rem">Analyze Your Resume</h2>
+    <p style="color:var(--text-muted);margin-bottom:2rem;font-size:0.9rem">Upload PDF • Select Role • Get Your Career DNA in 30 seconds</p>
+
+    {% if error %}<div class="error-box">{{ error }}</div>{% endif %}
+
+    <!-- File Drop Zone -->
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('resumeFile').click()">
+      <div class="drop-icon">📄</div>
+      <p class="drop-text">Drop your resume here or <span style="color:var(--accent)">click to browse</span></p>
+      <p style="color:var(--text-muted);font-size:0.8rem">PDF only · Max 5MB</p>
+      <input type="file" id="resumeFile" accept=".pdf" style="display:none" onchange="handleFileSelect(this)">
+    </div>
+    <div id="file-name" style="color:var(--success);font-size:0.85rem;margin-top:0.5rem;display:none"></div>
+
+    <!-- Role Selection -->
+    <div class="form-group" style="margin-top:1.5rem">
+      <label>Target Job Role</label>
+      <select id="jobRole" class="form-input">
+        <option value="Full Stack Developer">Full Stack Developer</option>
+        <option value="Data Analyst">Data Analyst</option>
+        <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+        <option value="UI/UX Designer">UI/UX Designer</option>
+        <option value="DevOps Engineer">DevOps Engineer</option>
+        <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+        <option value="Backend Developer">Backend Developer</option>
+        <option value="Android Developer">Android Developer</option>
+      </select>
+    </div>
+
+    <!-- Level Selection -->
+    <div class="form-group">
+      <label>Current Level</label>
+      <div class="level-pills">
+        <button class="level-pill active" onclick="setLevel(this, 'Student')">🎓 Student</button>
+        <button class="level-pill" onclick="setLevel(this, 'Final-Year Student')">📚 Final Year</button>
+        <button class="level-pill" onclick="setLevel(this, 'Graduate')">🏆 Graduate</button>
+      </div>
+      <input type="hidden" id="levelInput" value="Student">
+    </div>
+
+    <button onclick="submitResume()" class="btn-primary" style="width:100%;padding:0.9rem;font-size:1rem;margin-top:1rem" id="analyzeBtn">
+      ✨ Analyze My Career DNA
+    </button>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <h3 style="color:#f1f5f9">Analyzing your resume...</h3>
+  <p style="color:#64748b" id="loading-step">Extracting skills from PDF</p>
+</div>
+
+<style>
+.upload-wrapper { display:flex; justify-content:center; align-items:center; min-height:85vh; padding:2rem; }
+.upload-card { width:100%; max-width:520px; }
+.drop-zone {
+  border: 2px dashed var(--border); border-radius: var(--radius);
+  padding: 2.5rem; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: var(--bg-elevated);
+}
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--accent); background: rgba(99,102,241,0.05);
+}
+.drop-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.drop-text { color: var(--text-sub); margin-bottom: 0.25rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display:block; margin-bottom:0.5rem; font-size:0.85rem; color:var(--text-sub); }
+.form-input {
+  width:100%; padding:0.75rem 1rem;
+  background:var(--bg-elevated); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-size:0.95rem;
+}
+.form-input:focus { outline:none; border-color:var(--accent); }
+.level-pills { display:flex; gap:0.75rem; flex-wrap:wrap; }
+.level-pill {
+  padding:0.5rem 1.2rem; border-radius:20px; border:1px solid var(--border);
+  background:transparent; color:var(--text-sub); cursor:pointer; font-size:0.875rem;
+  transition:all 0.2s;
+}
+.level-pill.active {
+  background:rgba(99,102,241,0.15); border-color:var(--accent); color:var(--text);
+}
+.error-box { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:#ef4444; padding:0.75rem; border-radius:8px; margin-bottom:1rem; }
+</style>
+
+<script src="/static/js/upload.js"></script>
+{% endblock %}
