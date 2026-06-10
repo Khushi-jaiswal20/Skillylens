@@ -34,7 +34,7 @@
     letter-spacing="-0.3">Skilly</text>
 
   <!-- Wordmark: Lens (accent color) -->
-  <text x="91" y="25"
+  <text x="84" y="25"
     font-family="'Segoe UI', 'Inter', sans-serif"
     font-weight="700"
     font-size="16"
