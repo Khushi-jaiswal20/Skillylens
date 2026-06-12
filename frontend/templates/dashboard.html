@@ -66,6 +66,79 @@
       </div>
     </div>
   </div>
+  <!-- ATS Analysis Section -->
+<div class="card" style="margin-top:1.5rem">
+  <h2>📄 ATS Resume Analysis</h2>
+
+  <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+
+    <div style="
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      border:8px solid #6366f1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.8rem;
+      font-weight:700;">
+      {{ data.ats_score }}%
+    </div>
+
+    <div>
+      <h3>
+        {% if data.is_ats_friendly %}
+          🟢 ATS Friendly
+        {% else %}
+          🔴 Needs Improvement
+        {% endif %}
+      </h3>
+
+      <p style="color:#94a3b8">
+        Your resume ATS compatibility score is
+        <strong>{{ data.ats_score }}%</strong>
+      </p>
+    </div>
+
+  </div>
+
+  <h3 style="margin-top:2rem">✅ Detailed Checks</h3>
+
+  {% for item in data.ats_feedback %}
+    <div style="
+      margin-top:0.75rem;
+      padding:0.8rem;
+      border-radius:8px;
+      background:#111827">
+
+      <strong>
+        {% if item.status == 'pass' %}
+          ✅
+        {% elif item.status == 'warn' %}
+          ⚠️
+        {% else %}
+          ❌
+        {% endif %}
+        {{ item.check }}
+      </strong>
+
+      <p style="margin-top:0.25rem;color:#94a3b8">
+        {{ item.msg }}
+      </p>
+    </div>
+  {% endfor %}
+
+  <h3 style="margin-top:2rem">🚀 ATS Improvement Tips</h3>
+
+  <ul style="margin-top:1rem;padding-left:1.25rem">
+    {% for tip in data.ats_tips %}
+      <li style="margin-bottom:0.5rem">
+        {{ tip }}
+      </li>
+    {% endfor %}
+  </ul>
+
+</div>
 
   <!-- Roadmap Section -->
   <div class="card" style="margin-top:1.5rem">
@@ -93,4 +166,5 @@
     const analysisData = JSON.parse('{{ data|tojson|safe }}');
     initDashboard(analysisData);
 </script>
+<!-- <pre>{{ data }}</pre> -->
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, session, redirect, render_template, jsonify
 import bcrypt
 from extensions import mysql
+import json
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -39,7 +40,7 @@ def profile():
     cur = mysql.connection.cursor()
     
     # Get analyses
-    cur.execute("""SELECT job_role, level, readiness_score, existing_skills, 
+    cur.execute("""SELECT id, job_role, level, readiness_score, existing_skills, 
                    missing_skills, created_at FROM analyses 
                    WHERE user_id = %s ORDER BY created_at DESC LIMIT 5""",
                 (session['user_id'],))
@@ -56,6 +57,45 @@ def profile():
                           analyses=analyses, 
                           chats=chats,
                           name=session.get('user_name'))
+
+@auth_bp.route('/profile/analysis/<int:analysis_id>')
+def view_analysis(analysis_id):
+    if 'user_id' not in session:
+        return redirect('/login')
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT * FROM analyses WHERE id = %s AND user_id = %s""",
+                (analysis_id, session['user_id']))
+    row = cur.fetchone()
+    for i, val in enumerate(row):
+        print(i, type(val), val)
+    if not row:
+        return "Not found", 404
+    for i, value in enumerate(row):
+     print(i, type(value), value)
+    
+    # Reconstruct analysis data
+    data = {
+    'job_role': row[2],
+    'level': row[3],
+
+    'existing_skills': json.loads(row[5] or '[]'),
+    'missing_skills': json.loads(row[6] or '[]'),
+
+    'readiness_score': row[7],
+
+    'roadmap': json.loads(row[8] or '{}'),
+    'ai_tools': json.loads(row[9] or '{}'),
+
+    'good_to_have': json.loads(row[11] or '[]'),
+    'career_dna': json.loads(row[12] or '{}'),
+
+    'ats_score': row[13] or 0,
+    'ats_feedback': json.loads(row[14] or '[]'),
+
+    'name': session.get('user_name', '')
+}
+    session['analysis'] = data
+    return render_template('dashboard.html', data=data)
 
 @auth_bp.route('/delete-account')
 def delete_account():
@@ -90,23 +130,6 @@ def delete_account():
     session.clear()
 
     return redirect('/')
-
-@auth_bp.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        data = request.get_json()
-        name = data.get('name')
-        email = data.get('email')
-        password = bcrypt.hashpw(data.get('password').encode(), bcrypt.gensalt()).decode()
-        try:
-            cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO users (name, email, password) VALUES (%s, %s, %s)",
-                       (name, email, password))
-            mysql.connection.commit()
-            return jsonify({'success': True})
-        except:
-            return jsonify({'error': 'Email already exists'}), 400
-    return render_template('signup.html')
 
 @auth_bp.route('/logout')
 def logout():

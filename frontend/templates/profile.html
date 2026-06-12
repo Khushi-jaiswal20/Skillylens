@@ -16,18 +16,27 @@
     <h2 style="margin-bottom:1rem">📊 Past Analyses</h2>
     {% if analyses %}
         {% for a in analyses %}
-        <div class="card" style="margin-bottom:1rem">
+    <a href="/profile/analysis/{{ a[0] }}"
+     style="text-decoration:none;color:inherit">
+
+    <div class="card"
+     style="margin-bottom:1rem;cursor:pointer;transition:border-color .2s"
+     onmouseover="this.style.borderColor='#6366f1'"
+     onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div>
-                    <strong>{{ a[0] }}</strong>
-                    <span style="color:var(--text-muted);font-size:0.8rem;margin-left:0.5rem">· {{ a[1] }}</span>
-                </div>
-                <div style="color:var(--accent);font-weight:700;font-size:1.2rem">{{ a[2] }}%</div>
+            <strong>{{ a[1] }}</strong>
+         <span style="color:var(--text-muted);font-size:0.8rem;margin-left:0.5rem">
+        · {{ a[2] }}
+      </span>
+    </div>
+                <div style="color:var(--accent);font-weight:700;font-size:1.2rem">{{ a[3] }}%</div>
             </div>
             <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">
-                {{ a[5].strftime('%d %b %Y') if a[5] else '' }}
+                {{ a[6].strftime('%d %b %Y') if a[6] else '' }}
             </p>
         </div>
+        </a>
         {% endfor %}
     {% else %}
         <div class="card" style="text-align:center;color:var(--text-muted)">

@@ -134,6 +134,208 @@ SKILL_MAP = {
                 {"name": "Emerald (Gradle Doctor)", "use": "Optimize slow Android builds with AI tips", "link": "https://github.com/runningcode/gradle-doctor"},
             ]
         }
+    },
+    "Cloud Engineer": {
+        "required": ["AWS", "Azure", "GCP", "Terraform", "Docker", "Kubernetes",
+                     "Linux", "Networking", "IAM", "S3", "EC2", "CI/CD"],
+        "good_to_have": ["Helm", "Serverless", "CDN", "Cost Optimization", "Multi-cloud"],
+        "ai_tools": {
+            "famous": [
+                {"name": "AWS CodeWhisperer", "use": "AI for cloud infra code", "link": "https://aws.amazon.com/codewhisperer"},
+            ],
+            "underrated": [
+                {"name": "Infracost", "use": "AI cost estimation for Terraform", "link": "https://infracost.io"},
+                {"name": "Cloudquery", "use": "Cloud asset inventory as SQL", "link": "https://cloudquery.io"},
+                {"name": "Steampipe", "use": "Query cloud APIs with SQL", "link": "https://steampipe.io"},
+            ]
+        }
+    },
+    "Blockchain Developer": {
+        "required": ["Solidity", "Ethereum", "Web3.js", "Smart Contracts", "JavaScript",
+                     "Python", "Cryptography", "Git", "Hardhat", "IPFS"],
+        "good_to_have": ["Rust", "Polkadot", "DeFi", "NFT Standards", "Layer 2"],
+        "ai_tools": {
+            "famous": [
+                {"name": "ChatGPT", "use": "Solidity code review & audit", "link": "https://chat.openai.com"},
+            ],
+            "underrated": [
+                {"name": "Mythril", "use": "AI smart contract vulnerability scanner", "link": "https://github.com/ConsenSys/mythril"},
+                {"name": "Tenderly", "use": "Smart contract debugging & simulation", "link": "https://tenderly.co"},
+                {"name": "Slither", "use": "Static analysis for Solidity", "link": "https://github.com/crytic/slither"},
+            ]
+        }
+    },
+    "Game Developer": {
+        "required": ["Unity", "C#", "Unreal Engine", "C++", "3D Math", "Physics",
+                     "Git", "Game Design", "Animation", "UI/UX"],
+        "good_to_have": ["Blender", "Shader Programming", "Multiplayer Networking", "AR/VR", "Mobile Gaming"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Unity Muse", "use": "AI textures, animation & code in Unity", "link": "https://unity.com/products/muse"},
+            ],
+            "underrated": [
+                {"name": "Scenario.gg", "use": "AI game asset generator", "link": "https://scenario.gg"},
+                {"name": "Inworld AI", "use": "AI-powered NPC characters", "link": "https://inworld.ai"},
+                {"name": "Promethean AI", "use": "AI world-building assistant", "link": "https://prometheanai.com"},
+            ]
+        }
+    },
+    "Embedded Systems Engineer": {
+        "required": ["C", "C++", "Microcontrollers", "Arduino", "Raspberry Pi",
+                     "RTOS", "UART/SPI/I2C", "PCB Design", "Assembly", "Linux"],
+        "good_to_have": ["FreeRTOS", "Zephyr", "IoT Protocols", "FPGA", "Power Management"],
+        "ai_tools": {
+            "famous": [
+                {"name": "GitHub Copilot", "use": "C/C++ embedded code completion", "link": "https://copilot.github.com"},
+            ],
+            "underrated": [
+                {"name": "Wokwi", "use": "AI-powered online embedded simulator", "link": "https://wokwi.com"},
+                {"name": "PlatformIO AI", "use": "Embedded dev environment with AI", "link": "https://platformio.org"},
+                {"name": "Renode", "use": "Full system simulation for embedded", "link": "https://renode.io"},
+            ]
+        }
+    },
+    "Product Manager": {
+        "required": ["Product Roadmap", "Agile", "Scrum", "User Research", "SQL",
+                     "Data Analysis", "Wireframing", "Stakeholder Management", "A/B Testing", "PRD Writing"],
+        "good_to_have": ["Python", "Figma", "OKRs", "Growth Metrics", "Competitive Analysis"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Notion AI", "use": "PRD and roadmap writing", "link": "https://notion.so"},
+                {"name": "Jira AI", "use": "Sprint planning & ticket management", "link": "https://atlassian.com/jira"},
+            ],
+            "underrated": [
+                {"name": "Productboard AI", "use": "AI feature prioritization", "link": "https://productboard.com"},
+                {"name": "Sprig", "use": "AI user research & session replay", "link": "https://sprig.com"},
+                {"name": "Kraftful", "use": "AI product coach for PMs", "link": "https://kraftful.com"},
+            ]
+        }
+    },
+    "QA Engineer": {
+        "required": ["Selenium", "Python/Java", "Manual Testing", "Test Cases", "API Testing",
+                     "Postman", "SQL", "Git", "Bug Reporting", "Agile"],
+        "good_to_have": ["Cypress", "JMeter", "Performance Testing", "CI/CD", "Mobile Testing"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Postman AI", "use": "Auto-generate API tests", "link": "https://postman.com"},
+            ],
+            "underrated": [
+                {"name": "Testim", "use": "AI-powered test automation", "link": "https://testim.io"},
+                {"name": "Applitools", "use": "AI visual testing", "link": "https://applitools.com"},
+                {"name": "Mabl", "use": "Intelligent test automation platform", "link": "https://mabl.com"},
+                {"name": "Checkly", "use": "Monitoring-as-code with AI", "link": "https://checklyhq.com"},
+            ]
+        }
+    },
+    "Data Engineer": {
+        "required": ["Python", "SQL", "Apache Spark", "Kafka", "Airflow", "dbt",
+                     "AWS/GCP", "ETL Pipelines", "Data Warehousing", "Docker"],
+        "good_to_have": ["Snowflake", "Databricks", "Flink", "Delta Lake", "Terraform"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Databricks AI", "use": "Lakehouse with built-in AI", "link": "https://databricks.com"},
+            ],
+            "underrated": [
+                {"name": "Mage AI", "use": "Modern data pipeline builder with AI", "link": "https://mage.ai"},
+                {"name": "dbt Copilot", "use": "AI SQL transformations in dbt", "link": "https://getdbt.com"},
+                {"name": "Soda", "use": "AI-powered data quality monitoring", "link": "https://soda.io"},
+                {"name": "Datahub", "use": "Open-source data catalog with lineage", "link": "https://datahubproject.io"},
+            ]
+        }
+    },
+    "iOS Developer": {
+        "required": ["Swift", "SwiftUI", "Xcode", "UIKit", "REST API", "Core Data",
+                     "Git", "Firebase", "App Store Guidelines", "Auto Layout"],
+        "good_to_have": ["Combine", "RxSwift", "ARKit", "CoreML", "WidgetKit"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Xcode AI", "use": "Apple Intelligence code completion", "link": "https://developer.apple.com"},
+            ],
+            "underrated": [
+                {"name": "Codeium", "use": "Free AI autocomplete for Swift", "link": "https://codeium.com"},
+                {"name": "RocketSim", "use": "Enhanced iOS simulator with AI testing", "link": "https://rocketsim.app"},
+                {"name": "Emerge Tools", "use": "AI app size & performance optimization", "link": "https://emergetools.com"},
+            ]
+        }
+    },
+    "Technical Writer": {
+        "required": ["Documentation", "Markdown", "API Docs", "Git", "HTML",
+                     "Research", "Content Strategy", "Editing", "DITA/XML", "User Guides"],
+        "good_to_have": ["Swagger/OpenAPI", "Confluence", "Docusaurus", "Video Tutorials", "Localization"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Grammarly AI", "use": "Writing clarity & tone improvement", "link": "https://grammarly.com"},
+                {"name": "Notion AI", "use": "Documentation drafting", "link": "https://notion.so"},
+            ],
+            "underrated": [
+                {"name": "Mintlify", "use": "Auto-generate docs from code", "link": "https://mintlify.com"},
+                {"name": "Swimm", "use": "AI docs that stay in sync with code", "link": "https://swimm.io"},
+                {"name": "Archbee", "use": "AI knowledge base builder", "link": "https://archbee.com"},
+            ]
+        }
+    },
+    "AR/VR Developer": {
+        "required": ["Unity", "C#", "Unreal Engine", "3D Modeling", "WebXR",
+                     "Spatial Computing", "OpenXR", "Git", "UX for XR", "Shader Programming"],
+        "good_to_have": ["Blender", "ARKit", "ARCore", "Meta SDK", "Hand Tracking"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Meta AI SDK", "use": "AI for Quest spatial experiences", "link": "https://developer.meta.com"},
+            ],
+            "underrated": [
+                {"name": "Needle Tools", "use": "Web-based XR with AI components", "link": "https://needle.tools"},
+                {"name": "Meshy AI", "use": "Text to 3D model generation", "link": "https://meshy.ai"},
+                {"name": "Luma AI", "use": "Real-world to 3D NeRF capture", "link": "https://lumalabs.ai"},
+            ]
+        }
+    },
+    "Prompt Engineer": {
+        "required": ["LLM Fundamentals", "Python", "API Integration", "Chain-of-Thought",
+                     "RAG", "Vector Databases", "LangChain", "Evaluation Metrics", "NLP Basics", "Git"],
+        "good_to_have": ["Fine-tuning", "LlamaIndex", "Hugging Face", "MLflow", "Semantic Search"],
+        "ai_tools": {
+            "famous": [
+                {"name": "LangChain", "use": "LLM app framework", "link": "https://langchain.com"},
+                {"name": "OpenAI Playground", "use": "Prompt testing & iteration", "link": "https://platform.openai.com"},
+            ],
+            "underrated": [
+                {"name": "PromptLayer", "use": "Prompt version control & analytics", "link": "https://promptlayer.com"},
+                {"name": "Braintrust", "use": "AI eval & prompt management", "link": "https://braintrustdata.com"},
+                {"name": "Agenta", "use": "Open-source LLMOps platform", "link": "https://agenta.ai"},
+                {"name": "Langfuse", "use": "LLM observability & tracing", "link": "https://langfuse.com"},
+            ]
+        }
+    },
+    "Digital Marketing Analyst": {
+        "required": ["Google Analytics", "SEO", "SEM", "Meta Ads", "Excel",
+                     "Content Strategy", "Email Marketing", "CRM", "A/B Testing", "SQL"],
+        "good_to_have": ["Python", "Tableau", "HubSpot", "Copywriting", "Video Marketing"],
+        "ai_tools": {
+            "famous": [
+                {"name": "HubSpot AI", "use": "AI marketing automation", "link": "https://hubspot.com"},
+                {"name": "Jasper AI", "use": "AI marketing content generation", "link": "https://jasper.ai"},
+            ],
+            "underrated": [
+                {"name": "Surfer SEO", "use": "AI content optimization for ranking", "link": "https://surferseo.com"},
+                {"name": "Mutiny", "use": "AI website personalization", "link": "https://mutinyhq.com"},
+                {"name": "Pencil", "use": "AI ad creative generation", "link": "https://trypencil.com"},
+            ]
+        }
+    },
+    "Network Engineer": {
+        "required": ["TCP/IP", "Routing & Switching", "Cisco IOS", "Firewalls", "VPN",
+                     "Linux", "Wireshark", "DNS/DHCP", "BGP/OSPF", "Network Security"],
+        "good_to_have": ["SD-WAN", "Network Automation", "Python", "Ansible", "Cloud Networking"],
+        "ai_tools": {
+            "famous": [
+                {"name": "Cisco AI Network Analytics", "use": "AI network monitoring", "link": "https://cisco.com"},
+            ],
+            "underrated": [
+                {"name": "NetBrain", "use": "AI network automation & troubleshooting", "link": "https://netbraintech.com"},
+                {"name": "Batfish", "use": "Network config analysis & verification", "link": "https://batfish.org"},
+                {"name": "Forward Networks", "use": "AI network digital twin", "link": "https://forwardnetworks.com"},
+            ]
+        }
     }
 }
 
