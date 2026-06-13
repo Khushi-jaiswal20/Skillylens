@@ -630,3 +630,7 @@ select.form-input option {
     transition: color 0.2s;
 }
 .btn-skip:hover { color: var(--text); }
+/* Ye add karo end mein */
+html[data-theme="light"] .logo img {
+  filter: invert(1) hue-rotate(180deg);
+}
