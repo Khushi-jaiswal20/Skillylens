@@ -3,6 +3,12 @@ SKILL_MAP = {
         "required": ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express",
                      "MongoDB", "MySQL", "REST API", "Git", "Docker", "TypeScript"],
         "good_to_have": ["Redis", "GraphQL", "AWS", "CI/CD", "Kubernetes"],
+        "suggested_projects": [
+        "Build a full-stack e-commerce site with React + Node.js",
+        "Create a real-time chat app using Socket.io",
+        "Make a REST API with authentication using JWT",
+        "Build a expense tracker with MySQL backend",
+        "Deploy a portfolio website on AWS/Render", ],
         "ai_tools": {
             "famous": [
                 {"name": "GitHub Copilot", "use": "AI pair programmer", "link": "https://copilot.github.com"},
@@ -15,12 +21,20 @@ SKILL_MAP = {
                 {"name": "Pieces.app", "use": "AI snippet manager with context memory", "link": "https://pieces.app"},
                 {"name": "Mintlify", "use": "Auto-generates code documentation", "link": "https://mintlify.com"},
             ]
+            
         }
     },
     "Data Analyst": {
         "required": ["Python", "SQL", "Excel", "Pandas", "NumPy", "Tableau",
                      "Power BI", "Data Visualization", "Statistics", "EDA"],
         "good_to_have": ["Machine Learning", "Spark", "Airflow", "dbt", "Looker"],
+        "suggested_projects": [
+        "Sales dashboard in Power BI or Tableau",
+        "EDA on Kaggle dataset using Pandas + Matplotlib",
+        "Sentiment analysis on Twitter data using Python",
+        "SQL-based business insights report from real dataset",
+        "Customer churn prediction model with Scikit-learn",
+    ],
         "ai_tools": {
             "famous": [
                 {"name": "Power BI Copilot", "use": "AI-powered BI reports", "link": "https://powerbi.microsoft.com"},
@@ -38,6 +52,13 @@ SKILL_MAP = {
         "required": ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "NumPy",
                      "Pandas", "MLflow", "Docker", "REST API", "Git", "SQL"],
         "good_to_have": ["Kubernetes", "Spark", "Hugging Face", "ONNX", "Ray"],
+        "suggested_projects": [
+        "Image classifier using CNN with PyTorch",
+        "Chatbot using LangChain + Groq API",
+        "House price prediction with feature engineering",
+        "Resume parser using NLP and spaCy",
+        "Deploy an ML model as REST API using FastAPI",
+    ],
         "ai_tools": {
             "famous": [
                 {"name": "Hugging Face", "use": "Model hub & transformers", "link": "https://huggingface.co"},

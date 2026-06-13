@@ -66,6 +66,50 @@
       </div>
     </div>
   </div>
+  <!-- Projects Row -->
+<div style="display:grid;grid-template-columns:1fr 1fr;
+            gap:1.25rem;margin-top:1.25rem" class="projects-grid">
+
+  <!-- Projects Done -->
+  <div class="card">
+    <h3>🛠 Projects Done
+      <span style="color:#22c55e;font-weight:400;font-size:0.85rem">
+        ({{ data.extracted_projects|length }})
+      </span>
+    </h3>
+    <div style="margin-top:0.75rem">
+      {% if data.extracted_projects %}
+        <ul style="padding-left:1.1rem;display:flex;flex-direction:column;gap:0.5rem">
+          {% for project in data.extracted_projects %}
+          <li style="font-size:0.875rem;color:var(--text-sub);line-height:1.5">
+            {{ project }}
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p style="font-size:0.85rem;color:var(--text-muted)">
+          No projects detected in resume. Add a Projects section!
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Suggested Projects -->
+  <div class="card">
+    <h3>💡 Suggested Projects</h3>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem">
+      Build these to strengthen your {{ data.job_role }} profile
+    </p>
+    <ul style="padding-left:1.1rem;display:flex;flex-direction:column;gap:0.5rem">
+      {% for project in data.suggested_projects %}
+      <li style="font-size:0.875rem;color:var(--text-sub);line-height:1.5">
+        {{ project }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
  
    <!-- ATS Analysis Section -->
 <div class="card" style="margin-top:1.5rem">

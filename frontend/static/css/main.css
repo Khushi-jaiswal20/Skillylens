@@ -634,3 +634,6 @@ select.form-input option {
 html[data-theme="light"] .logo img {
   filter: invert(1) hue-rotate(180deg);
 }
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr !important; }
+}

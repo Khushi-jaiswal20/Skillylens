@@ -44,3 +44,36 @@ def extract_name_email(text):
     lines = text.strip().split('\n')
     name = lines[0].strip() if lines else "User"
     return name, emails[0] if emails else ""
+def extract_projects(text):
+    import re
+    projects = []
+    lines = text.split('\n')
+    
+    # Project section dhundho
+    in_project_section = False
+    project_keywords = ['project', 'projects', 'personal projects', 
+                        'academic projects', 'key projects']
+    stop_keywords = ['experience', 'education', 'skills', 'certifications',
+                     'achievements', 'internship', 'work experience']
+    
+    for line in lines:
+        line_lower = line.lower().strip()
+        
+        # Project section start
+        if any(kw == line_lower for kw in project_keywords):
+            in_project_section = True
+            continue
+        
+        # Stop section
+        if in_project_section and any(kw in line_lower for kw in stop_keywords):
+            in_project_section = False
+            continue
+        
+        # Extract project names
+        if in_project_section and line.strip():
+            # Bullet points, numbers, dashes hata do
+            clean = re.sub(r'^[\s\-\*\•\d\.\)]+', '', line.strip())
+            if len(clean) > 5 and len(clean) < 100:
+                projects.append(clean)
+    
+    return projects[:6]  # Max 6 projects
