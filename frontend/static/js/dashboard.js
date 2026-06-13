@@ -21,17 +21,25 @@ function renderRadarChart(dna) {
         pointRadius: 4
       }]
     },
-    options: {
-      scales: {
-        r: {
-          min: 0, max: 100,
-          ticks: { color: '#64748b', stepSize: 25 },
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          pointLabels: { color: '#94a3b8', font: { size: 11 } }
-        }
+   // NAYA
+options: {
+  scales: {
+    r: {
+      min: 0, max: 100,
+      ticks: { display: false },
+      grid: {
+        color: document.documentElement.getAttribute('data-theme') === 'light'
+          ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.05)'
       },
-      plugins: { legend: { display: false } }
+      pointLabels: {
+        color: document.documentElement.getAttribute('data-theme') === 'light'
+          ? '#374151' : '#94a3b8',
+        font: { size: 11 }
+      }
     }
+  },
+  plugins: { legend: { display: false } }
+}
   });
 }
 
@@ -51,7 +59,7 @@ function renderRoadmap(roadmap) {
     const phase = roadmap[p.key];
     if (!phase) return;
     const tasks = (phase.tasks || []).map(t => `
-      <div style="background:#1a1a2e;padding:0.75rem;border-radius:8px;margin:0.5rem 0">
+      <div style="background:var(--bg-elevated);padding:0.75rem;border-radius:8px;margin:0.5rem 0">
         <div style="display:flex;justify-content:space-between">
           <strong>${t.skill || t.task}</strong>
           <span style="color:#6366f1;font-size:0.8rem">${t.hours || '?'}h</span>
