@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css">
+    <script>
+        (function() {
+        var t = localStorage.getItem('sl-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -16,6 +22,22 @@
 </a>
         
         <div class="nav-links">
+            <!-- Theme toggle — nav-links ke andar sabse pehle -->
+<button id="themeToggle" onclick="toggleTheme()"
+  style="background:var(--bg-elevated);
+         border:1px solid var(--border);
+         color:var(--text-sub);
+         padding:0.35rem 0.8rem;
+         border-radius:20px;
+         font-size:0.8rem;
+         cursor:pointer;
+         display:flex;
+         align-items:center;
+         gap:0.4rem;
+         transition:all 0.2s">
+  <span id="themeIcon">☀️</span>
+  <span id="themeLabel">Light</span>
+</button>
             <a href="/upload">Analyze Resume</a>
             <a href="/chatbot">Skilly Mentor👩‍🏫</a>
             <a href="/about">About</a>

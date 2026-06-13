@@ -4,6 +4,43 @@
    ============================================ */
 
 /* ---------- CSS Variables ---------- */
+/* Light mode variables */
+html[data-theme="light"] {
+  --bg:           #f5f4f0;
+  --bg-card:      #ffffff;
+  --bg-elevated:  #e8e6e1;
+  --accent:       #4f46e5;
+  --accent-2:     #7c3aed;
+  --accent-glow:  rgba(79, 70, 229, 0.12);
+  --success:      #16a34a;
+  --warning:      #d97706;
+  --danger:       #dc2626;
+  --text:         #0f0f0f;
+  --text-muted:   #6b7280;
+  --text-sub:     #374151;
+  --border:       rgba(0, 0, 0, 0.12);
+  --shadow-glow:  0 0 40px rgba(79, 70, 229, 0.08);
+  --radius:       14px;
+  --radius-sm:    8px;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --transition:   0.2s ease;
+}
+body, .card, .navbar, .form-input,
+.chat-bubble, .bubble-ai, .loading-overlay,
+.btn-outline, .btn-primary, h1, h2, h3, p {
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+}
+
+/* Smooth transitions on theme switch */
+/* body, .card, .navbar, .form-input,
+.chat-bubble, .bubble-ai, .loading-overlay {
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+} */
 :root {
   --bg:           #09090f;
   --bg-card:      #12121c;
@@ -99,7 +136,7 @@ p { color: var(--text-sub); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(9, 9, 15, 0.85);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
 }
 
 .logo {
