@@ -135,3 +135,6 @@ def delete_account():
 def logout():
     session.clear()
     return redirect('/')
+@auth_bp.route('/mock-interview')
+def mock_interview():
+    return render_template('mock_interview.html')
