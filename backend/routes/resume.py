@@ -69,6 +69,14 @@ def analyze():
         'is_ats_friendly': ats_result['is_ats_friendly'],
         'ats_feedback': ats_result['feedback'],
         'ats_tips': ats_result['tips'],
+       
+    # ...existing keys...
+        'ats_score': ats_result['ats_score'],
+        'ats_grade': ats_result.get('ats_grade', ''),   # ← ADD
+        'is_ats_friendly': ats_result['is_ats_friendly'],
+        'ats_feedback': ats_result['feedback'],
+        'ats_tips': ats_result['tips'],
+
     }
     
     # Save to DB if logged in

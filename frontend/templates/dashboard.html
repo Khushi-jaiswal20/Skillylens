@@ -90,6 +90,12 @@
       <p style="margin-top:0.4rem;color:var(--text-muted);font-size:0.85rem">
         ATS compatibility score: <strong style="color:var(--text)">{{ data.ats_score }}/100</strong>
       </p>
+      {% if data.ats_grade %}
+<div style="font-size:0.75rem;font-weight:700;margin-top:0.25rem"
+     class="{% if data.ats_score >= 70 %}text-success{% elif data.ats_score >= 40 %}text-warning{% else %}text-danger{% endif %}">
+  Grade: {{ data.ats_grade }}
+</div>
+{% endif %}
     </div>
   </div>
 
