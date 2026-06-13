@@ -78,18 +78,20 @@ def analyze():
         (user_id, job_role, level, resume_text, existing_skills, missing_skills, 
          readiness_score, roadmap, ai_tools, career_dna, ats_score, ats_feedback, good_to_have)
         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
-        (session['user_id'], job_role, level, text[:5000],
-         json.dumps(analysis['existing_skills']),
-         json.dumps(analysis['missing_skills']),
-         analysis['readiness_score'],
-         json.dumps(roadmap),
-         json.dumps(analysis['ai_tools']),
-         json.dumps(analysis['career_dna']),
-         ats_result['ats_score'],
-         json.dumps(ats_result['feedback']),
-         json.dumps(analysis['good_to_have'])))
-    mysql.connection.commit()
-    session['analysis_id'] = cur.lastrowid
+        (
+            session['user_id'], job_role, level, text[:5000],
+            json.dumps(analysis['existing_skills']),
+            json.dumps(analysis['missing_skills']),
+            analysis['readiness_score'],
+            json.dumps(roadmap),
+            json.dumps(analysis['ai_tools']),
+            json.dumps(analysis['career_dna']),
+            ats_result['ats_score'],
+            json.dumps(ats_result['feedback']),
+            json.dumps(analysis['good_to_have'])
+        ))
+        mysql.connection.commit()
+        session['analysis_id'] = cur.lastrowid
     
     session['analysis'] = result
     os.remove(filepath)  # cleanup

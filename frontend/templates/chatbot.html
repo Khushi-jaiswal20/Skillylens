@@ -33,7 +33,9 @@
     <div class="chat-input-bar">
       <input type="text" id="chatInput" placeholder="Ask anything about your career..." class="chat-input"
              onkeydown="if(event.key==='Enter') sendMessage()">
-      <button onclick="sendMessage()" class="chat-send-btn">Send →</button>
+      <button id="sendBtn" onclick="sendMessage()" class="chat-send-btn">
+  Send →
+</button>
     </div>
   </div>
 </div>
