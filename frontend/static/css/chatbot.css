@@ -1,6 +1,6 @@
 .chatbot-wrapper {
   display: flex;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 90px);
   overflow: hidden;
 }
 .chat-sidebar {
@@ -50,4 +50,10 @@
 
 @media (max-width: 768px) {
   .chat-sidebar { display: none; }
+}
+.chat-messages div {
+  padding: 12px 16px;
+  border-radius: 18px;
+  width: fit-content;
+  max-width: 75%;
 }
